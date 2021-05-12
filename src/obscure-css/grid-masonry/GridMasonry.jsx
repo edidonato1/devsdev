@@ -18,18 +18,34 @@ const MasonryColumn = styled.div`
     margin: 0 auto;
     border: 2px solid lightgray;
     padding: 20px;
+
+
     
                                     // auto-flow
-    // masonry-auto-flow: next;
+    /* masonry-auto-flow: next; */
 
                                     // align-tracks
-    // align-tracks: end;
-    // align-tracks: center;
-    // align-tracks: space-between;
+
+
+     align-tracks: end, start, end;
     // align-tracks: space-evenly;
     // align-tracks: space-around;
+    
                                     // align-tracks multiple values
 
+
+                                    // feature queries
+     @supports not (grid-template-rows: masonry) {
+         display: flex;
+         flex-wrap: wrap;
+         justify-content: space-evenly;
+         //gap: 20px;
+         column-gap: 40px;
+         div {
+             block-size: 4em !important;
+             width: 30%;
+         }
+     }
 
 `
 const MasonryRow = styled.div`
@@ -41,8 +57,7 @@ const MasonryRow = styled.div`
     margin: 0 auto;
     border: 2px solid lightgray;
     padding: 20px;
-                                    // justify-tracks
-    // justify-tracks: end;
+    /* justify-tracks: end; */
     // justify-tracks: center;
 `  
 
@@ -66,8 +81,8 @@ const Block = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-
 `
+
 
 const GridMasonry = () => {
     
