@@ -2,13 +2,15 @@ import {useState} from 'react';
 import styled from 'styled-components';
 
 
-const ClipMain = styled.div`
+export const ClipMain = styled.div`
     padding: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
     h2 {    
         color: lightgray;
+        display: flex;
+        flex-direction: column;
         margin-top: 150px;
         font-weight: 400;
         font-family: courier;
@@ -52,8 +54,7 @@ const InsetCustom = styled(Img)`
 
 const Leaf = styled(Img)`
     clip-path: path('M256 203C150 309 150 309 44 203 15 174 15 126 44 97 73 68 121 68 150 97 179 68 227 68 256 97 285 126 285 174 256 203')
-`
-
+`;
 
 const ShapeContainer = styled.div`
     width: 800px;
@@ -71,14 +72,13 @@ const ShapeOutside = styled(Img)`
     margin: 20px;
 `
 
-const Button = styled.button`
+export const Button = styled.button`
     background: aqua;
     border: 2px solid #fe0b3b;
     color: #fe0b3b;
     font-family: avenir;
     font-size: 20px;
     padding: 10px;
-    margin: 50px;
 
     &:hover {
         border: 2px solid white;
