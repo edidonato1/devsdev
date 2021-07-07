@@ -11,10 +11,13 @@ const Main = styled.div`
     }
 `
 
-export default function Home () {
+export default function Home() {
 
     return (
         <Main>
+            <Link to='/query-dogs'>
+                <Button>Query Dawgs</Button>
+            </Link>
             <Link to='/dogs'>
                 <Button>Dogs</Button>
             </Link>

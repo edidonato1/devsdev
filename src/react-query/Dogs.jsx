@@ -3,7 +3,7 @@ import axios from 'axios';
 import {ClipMain} from '../obscure-css/clip-path/ClipPath';
 import styled from 'styled-components';
 
-const ImgContainer = styled.div`
+export const ImgContainer = styled.div`
     width: 600px;
     height: 400px;
     maxHeight: 400px;
@@ -13,19 +13,18 @@ const ImgContainer = styled.div`
     border: 5px solid #fe0b3b;
 `
 
-export default function Dogs () {
-    const [dogSearch, setDogSearch] = useState('');
-    const [allTheDogs, setAllTheDogs] = useState([])
+export default function Dogs() {
     const [dogList, setDogList] = useState([])
-    const [searched, setSearched] = useState(false);
+    const [dogSearch, setDogSearch] = useState('');
+    const [allDogImages, setAllDogImages] = useState([])
     const [dogImage, setDogImage] = useState('');
+    const [searched, setSearched] = useState(false);
 
     useEffect(() => {
         const fetchDogs = async () => {
-            const AllDogURL = 'https://dog.ceo/api/breeds/list/all'
-            const resp = await axios.get(AllDogURL);
+            const URL = 'https://dog.ceo/api/breeds/list/all'
+            const resp = await axios.get(URL);
             setDogList(resp.data.message);
-            console.log(resp.data.message);
         }
         fetchDogs();
     }, [])
@@ -35,18 +34,19 @@ export default function Dogs () {
             setDogImage(null)
             const URL = `https://dog.ceo/api/breed/${dogSearch}/images`
             const resp = await axios.get(URL);
-            setAllTheDogs(resp.data.message);
+            setAllDogImages(resp.data.message);
         }
         fetchDogs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searched])
 
     useEffect(() => {
-        if (allTheDogs) {
-            const howManyDogs = allTheDogs.length;
+        if (allDogImages) {
+            const howManyDogs = allDogImages.length;
             const randomDogIndex = Math.floor(Math.random() * howManyDogs)
-            setDogImage(allTheDogs[randomDogIndex]);
+            setDogImage(allDogImages[randomDogIndex]);
         }
-    }, [allTheDogs])
+    }, [allDogImages])
 
     return (
         <ClipMain>
