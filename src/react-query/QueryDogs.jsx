@@ -15,15 +15,17 @@ const fetchImages = async(breed) => {
 }
 
 export default function QueryDogs() {
+
     const { data, status } = useQuery('dogs', fetchDogs);
     // console.log(useQuery('dogs', fetchDogs))
+
     const dogList = data?.message;
 
     const [dogSearch, setDogSearch] = useState('');
     
     // query key | query function | config
     const images = useQuery(
-        'images', 
+        ['images', dogSearch], 
         () => fetchImages(dogSearch), 
         {
             enabled: !!dogSearch,
@@ -32,10 +34,7 @@ export default function QueryDogs() {
         },
     );
 
-    // const dogQuery = useDogs();
-    // console.log(dogQuery)
-
-    const {refetch} = useQuery();
+    const isLoading = images?.isLoading;
 
     const dogImages = images?.data?.message;
     const howManyDogs = images?.data?.message.length;
@@ -45,6 +44,9 @@ export default function QueryDogs() {
         dogImage = dogImages[randomDogIndex];    
     }
 
+    let imageShown = isLoading || !dogImage
+    ? 'https://images.unsplash.com/photo-1548247416-ec66f4900b2e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2F0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60'
+    : dogImage
     return (
         <ClipMain>
             <h1>dogs again</h1>
@@ -55,7 +57,6 @@ export default function QueryDogs() {
                 <select
                     onChange={(e)=> {
                         setDogSearch(e.target.value);
-                        // refetch(images)
                     }}
                     >
                     <option disabled value='default'>PICK A DAWG</option>
@@ -77,7 +78,8 @@ export default function QueryDogs() {
                 <img
                     style={{ height: '100%', width: '100%', objectFit: 'contain'}}
                     alt="current dawg"  
-                    src={dogImage ? dogImage : 'https://images.unsplash.com/photo-1548247416-ec66f4900b2e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2F0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60'} />
+                    src={imageShown}
+                />
             </ImgContainer>
         </ClipMain>
     )

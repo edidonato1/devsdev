@@ -5,19 +5,10 @@ import Home from "./obscure-css/home";
 import ClipPath from "./obscure-css/clip-path/ClipPath";
 import Dogs from "./react-query/Dogs";
 import QueryDogs from "./react-query/QueryDogs";
-import { QueryClient, QueryClientProvider } from "react-query";
 
 function App() {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        refetchOnWindowFocus: false
-      }
-    }
-  });
 
   return (
-    <QueryClientProvider client={queryClient}>
       <div className="App">
         <Switch>
           <Route exact path="/" component={Home} />
@@ -27,7 +18,6 @@ function App() {
           <Route path="/clip-path" component={ClipPath} />
         </Switch>
       </div>
-    </QueryClientProvider>
   );
 }
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
-import {ClipMain} from '../obscure-css/clip-path/ClipPath';
+import { ClipMain } from '../obscure-css/clip-path/ClipPath';
 import styled from 'styled-components';
 
 export const ImgContainer = styled.div`
